@@ -3,6 +3,6 @@
 
 ### This is an intermediate tool to upload sorted words to database.
 
-#####Currently Uploaded:
-######WordBD_Classic
+#####Currently Uploaded
+#######WordBD_Classic
 
