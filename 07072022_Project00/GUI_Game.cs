@@ -7,25 +7,17 @@ namespace Project_00
     public class GUI_Game
     {
         // Fields
-        List<string> GAME_wordList = new List<string>{};
 
         // Constructor
-        public GUI_Game(List<string> INPUT_List)
-        {
-            foreach (string INPUT_currentWord in INPUT_List)
-            {
-                GAME_wordList.Add(INPUT_currentWord);
-            }
-        }
 
         //  Methods
-        public void GUI_PrintGameGrid()
+        public void GUI_PrintGameGrid(List<string> INPUT_wordList)
         {
-            int WORK_numColumns = this.GAME_wordList[0].Length;
-            for (int i = 0 ; i < this.GAME_wordList.Count ; i++)
+            int WORK_numColumns = INPUT_wordList[0].Length;
+            for (int i = 0 ; i < INPUT_wordList.Count ; i++)
             {
                 GUI_GAME_PrintHorizontal(WORK_numColumns);
-                GUI_GAME_PrintVertial(WORK_numColumns, this.GAME_wordList[i]);
+                GUI_GAME_PrintVertial(WORK_numColumns, INPUT_wordList[i]);
             }
             GUI_GAME_PrintHorizontal(WORK_numColumns);
         }
