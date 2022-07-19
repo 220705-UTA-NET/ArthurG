@@ -39,5 +39,51 @@ namespace Project_00
             Console.WriteLine("Press anything to return to main menu");
             Console.ReadKey();
         }
+
+        public void GUI_MENU_printLeaderboards()
+        {
+            ConsoleKeyInfo INPUT_userMenu;
+            bool FLAG_runMenu = true;
+            
+            DATA_Menu DB_leaderboardAccess = new DATA_Menu();
+
+            while (FLAG_runMenu)
+            {
+                Console.Clear();
+                GUI_MENU_printLeaderboardsHeader();
+                INPUT_userMenu = Console.ReadKey();
+                switch (INPUT_userMenu.KeyChar)
+                {
+                    case 'i':
+                        DB_leaderboardAccess.DATA_MENU_printLeaderboardData('i');
+                        break;
+                    case 'k':
+                        DB_leaderboardAccess.DATA_MENU_printLeaderboardData('k');
+                        break;
+                    case 'q':
+                        FLAG_runMenu = false;
+                        break;
+                }
+                if (FLAG_runMenu == true)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.WriteLine("Press anything to continue");
+                    Console.ReadKey();
+                }
+            }
+        }
+
+        private void GUI_MENU_printLeaderboardsHeader()
+        {
+            string PATH_mainMenu = @"./MENUS/MENU_Leaderboard.txt";
+
+            StreamReader WORK_fsStream = new StreamReader(PATH_mainMenu);
+            string WORK_fsLine;
+            while((WORK_fsLine = WORK_fsStream.ReadLine()) != null)
+            {
+                Console.WriteLine(WORK_fsLine);
+            }
+        }
     }
 }

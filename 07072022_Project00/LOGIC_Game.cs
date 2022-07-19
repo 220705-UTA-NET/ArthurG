@@ -104,6 +104,11 @@ namespace Project_00
             Console.WriteLine("\tTime Used: " + WORK_usedTime + " sec");
 
             Console.WriteLine();
+            if (FLAG_wonGame == true)
+            {
+                LOGIC_GAME_uploadLeaderboards(COUNTER_numGuesses, WORK_usedTime);
+            }
+            
             Console.WriteLine();
             Console.WriteLine("Press anything to continue");
             Console.ReadKey();
@@ -154,7 +159,7 @@ namespace Project_00
             return OUTPUT_Guess;
         }
 
-        public string LOGIC_GAME_charCheck(string INPUT_word)
+        private string LOGIC_GAME_charCheck(string INPUT_word)
         {
             StringBuilder WORK_userWord = new StringBuilder(INPUT_word);
 
@@ -182,6 +187,38 @@ namespace Project_00
 
             Console.WriteLine(OUTPUT_word);
             return OUTPUT_word;
+        }
+
+        private void LOGIC_GAME_uploadLeaderboards(int INPUT_usedTurns, int INPUT_usedTime)
+        {
+            Console.WriteLine("Do you want to submit your game to the leaderboards [y/n]");
+            ConsoleKeyInfo INPUT_userChoice = Console.ReadKey();
+
+            bool FLAG_validChoice = false;
+            while (FLAG_validChoice == false)
+            {
+                switch (INPUT_userChoice.KeyChar)
+                {
+                    case 'y':
+                        FLAG_validChoice = true;
+                        
+                        Console.WriteLine("\nPlease enter your name: ");
+                        string INPUT_playerName = Console.ReadLine();
+
+                        DATA_Game DB_uploader = new DATA_Game();
+                        DB_uploader.DATA_GAME_uploadDatabase(INPUT_playerName, INPUT_usedTurns, INPUT_usedTime);
+
+                        Console.WriteLine("Record uploaded.");
+
+                        break;
+
+                    case 'n':
+                        FLAG_validChoice = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
     }
 }

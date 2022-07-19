@@ -10,6 +10,7 @@
 #                                                  #
 #                                                  #
 #        g - Start Classic Game                    #
+#        l - Leaderboards                          #
 #        c - Credits                               #
 #                                                  #
 #        q - Quit                                  #

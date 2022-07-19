@@ -30,6 +30,9 @@ namespace Project_00
                     case 'c':
                         WORK_gameMenuNavigator.GUI_MENU_printCredits();
                         break;
+                    case 'l':
+                        WORK_gameMenuNavigator.GUI_MENU_printLeaderboards();
+                        break;
                     case 'q':
                         FLAG_runMenu = false;
                         break;
