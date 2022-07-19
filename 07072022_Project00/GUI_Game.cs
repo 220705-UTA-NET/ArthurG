@@ -32,7 +32,19 @@ namespace Project_00
             Console.Write("|");
             for (int i = 0 ; i < INPUT_numRows ; i++)
             {
-                Console.Write("   " + INPUT_currentWord[i] + "   |");
+                Console.Write("   ");
+                if (char.IsUpper(INPUT_currentWord[i]) == true)
+                {
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.Write(INPUT_currentWord[i]);
+                    Console.ResetColor();
+                }
+                else
+                {
+                    Console.Write(INPUT_currentWord[i]);
+                }
+                Console.Write("   |");
             }
             Console.Write("\n");
             Console.WriteLine("|" + string.Concat(Enumerable.Repeat("       |", INPUT_numRows)));

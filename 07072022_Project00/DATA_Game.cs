@@ -1,3 +1,5 @@
+// Class to communicate with database regarding game functions.
+
 using System;
 using System.Data.SqlClient;
 
@@ -53,6 +55,8 @@ namespace Project_00
             {
                 OUTPUT_word = DB_reader.GetString(0);
             }
+
+            DB_connection.Close();
             return OUTPUT_word;
         }
     }
