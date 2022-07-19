@@ -42,7 +42,7 @@ namespace Project_00
             }
         }
 
-        public string DATA_Game_randWord()
+        public string DATA_GAME_randWord()
         {
             string OUTPUT_word = "";
             using SqlConnection DB_connection = new SqlConnection(this.DB_PROP_connectionString);

@@ -11,7 +11,6 @@ namespace Project_00
         // Fields
         private int GAME_PROP_numWordLength;
         private int GAME_PROP_numGuesses;
-        private string GAME_PROP_blankGuess;
         private string GAME_DATA_correctWord  = "";
         private List<string> GAME_DATA_wordList = new List<string>{};
 
@@ -20,14 +19,13 @@ namespace Project_00
         {
             this.GAME_PROP_numWordLength = INPUT_numWordLength;
             this.GAME_PROP_numGuesses = INPUT_numGuesses;
-            this.GAME_PROP_blankGuess = string.Concat(Enumerable.Repeat(" ", INPUT_numWordLength));
             
             DATA_Game GEN_randWord = new DATA_Game();
-            this.GAME_DATA_correctWord = GEN_randWord.DATA_Game_randWord();
+            this.GAME_DATA_correctWord = GEN_randWord.DATA_GAME_randWord();
 
             for (int i = 0 ; i < INPUT_numGuesses ; i++)
             {
-                GAME_DATA_wordList.Add(GAME_PROP_blankGuess);
+                GAME_DATA_wordList.Add("");
             }
         }
 
@@ -36,12 +34,11 @@ namespace Project_00
         // {
         //     this.GAME_PROP_numWordLength = INPUT_numWordLength;
         //     this.GAME_PROP_numGuesses = INPUT_numGuesses;
-        //     this.GAME_PROP_blankGuess = string.Concat(Enumerable.Repeat(" ", INPUT_numWordLength));
         //     this.GAME_DATA_correctWord = INPUT_randWord;
 
         //     for (int i = 0 ; i < INPUT_numGuesses ; i++)
         //     {
-        //         GAME_DATA_wordList.Add(GAME_PROP_blankGuess);
+        //         GAME_DATA_wordList.Add("");
         //     }
         // }
     
@@ -57,30 +54,34 @@ namespace Project_00
             for (int i = 0 ; i < GAME_PROP_numGuesses ; i++)
             {
                 Console.Clear();
-                GAME_Display.GUI_PrintGameGrid(GAME_DATA_wordList);
+                GAME_Display.GUI_GAME_PrintGameGrid(GAME_PROP_numWordLength, GAME_PROP_numGuesses, GAME_DATA_wordList);
                 
-                COUNTER_numGuesses++;
-
                 string INPUT_userWord = LOGIC_GAME_getValidGuess();
-                string WORK_userWord = LOGIC_GAME_capCorrectChars(INPUT_userWord);
-                GAME_DATA_wordList[i] = WORK_userWord;   
-
                 if(INPUT_userWord == "quit")
                 {
                     break;
                 }
+
+                COUNTER_numGuesses++;
+                string WORK_userWord = LOGIC_GAME_charCheck(INPUT_userWord);
+                GAME_DATA_wordList[i] = WORK_userWord;   
+
                 if(INPUT_userWord == GAME_DATA_correctWord)
                 {
                     FLAG_wonGame = true;
                     break;
                 }        
+
+                //Debug
+                // Console.WriteLine(WORK_userWord);
+                // Console.ReadKey();
             }
             DateTime WORK_TimerPost = DateTime.Now;
-            int WORK_usedTime = (WORK_TimerPost - WORK_TimerPrior).Seconds;
+            int WORK_usedTime = ((WORK_TimerPost - WORK_TimerPrior).Minutes * 60) + (WORK_TimerPost - WORK_TimerPrior).Seconds;
 
             Console.Clear();
 
-            GAME_Display.GUI_PrintGameGrid(GAME_DATA_wordList);
+            GAME_Display.GUI_GAME_PrintGameGrid(GAME_PROP_numWordLength, GAME_PROP_numGuesses, GAME_DATA_wordList);
 
 
             Console.WriteLine();
@@ -153,19 +154,33 @@ namespace Project_00
             return OUTPUT_Guess;
         }
 
-        public string LOGIC_GAME_capCorrectChars(string INPUT_word)
+        public string LOGIC_GAME_charCheck(string INPUT_word)
         {
             StringBuilder WORK_userWord = new StringBuilder(INPUT_word);
 
-            for(int j = 0 ; j < this.GAME_DATA_correctWord.Length ; j++)
+            int WORK_counterCorrctWord = 0;
+            for(int j = 0 ; j < WORK_userWord.Length ; j++)
             {
-                if (WORK_userWord[j] == GAME_DATA_correctWord[j])
+                // Debug
+                // Console.WriteLine(WORK_userWord[j] + ", " +GAME_DATA_correctWord[WORK_counterCorrctWord]);
+
+                if (WORK_userWord[j] == GAME_DATA_correctWord[WORK_counterCorrctWord])
                 {
-                    WORK_userWord[j] = char.ToUpper(WORK_userWord[j]);
+                    j++;
+                    WORK_userWord.Insert(j,"^");
                 }
+                else if(GAME_DATA_correctWord.Contains(INPUT_word[WORK_counterCorrctWord]))
+                {
+                    j++;
+                    WORK_userWord.Insert(j, "*");
+                }
+                WORK_counterCorrctWord++;
             }
 
+            WORK_userWord.Append('#');
             string OUTPUT_word = WORK_userWord.ToString();
+
+            Console.WriteLine(OUTPUT_word);
             return OUTPUT_word;
         }
     }

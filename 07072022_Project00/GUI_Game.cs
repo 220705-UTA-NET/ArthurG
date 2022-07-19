@@ -11,43 +11,64 @@ namespace Project_00
         // Constructor
 
         //  Methods
-        public void GUI_PrintGameGrid(List<string> INPUT_wordList)
+        public void GUI_GAME_PrintGameGrid(int INPUT_numColumns, int INPUT_numRows, List<string> INPUT_wordList)
         {
-            int WORK_numColumns = INPUT_wordList[0].Length;
-            for (int i = 0 ; i < INPUT_wordList.Count ; i++)
+            for (int i = 0 ; i < INPUT_numRows ; i++)
             {
-                GUI_GAME_PrintHorizontal(WORK_numColumns);
-                GUI_GAME_PrintVertial(WORK_numColumns, INPUT_wordList[i]);
+                GUI_GAME_PrintHorizontal(INPUT_numColumns);
+                GUI_GAME_PrintVertial(INPUT_numColumns, INPUT_wordList[i]);
             }
-            GUI_GAME_PrintHorizontal(WORK_numColumns);
+            GUI_GAME_PrintHorizontal(INPUT_numColumns);
         }
+
 
         void GUI_GAME_PrintHorizontal(int INPUT_numColumns)
         {
             Console.WriteLine("+" + string.Concat(Enumerable.Repeat("-------+", INPUT_numColumns)));
         }
-        void GUI_GAME_PrintVertial(int INPUT_numRows, string INPUT_currentWord)
+
+        void GUI_GAME_PrintVertial(int INPUT_numColumns, string INPUT_currentWord)
         {
-            Console.WriteLine("|" + string.Concat(Enumerable.Repeat("       |", INPUT_numRows)));
+            Console.WriteLine("|" + string.Concat(Enumerable.Repeat("       |", INPUT_numColumns)));
             Console.Write("|");
-            for (int i = 0 ; i < INPUT_numRows ; i++)
+            if (INPUT_currentWord == "")
             {
-                Console.Write("   ");
-                if (char.IsUpper(INPUT_currentWord[i]) == true)
+                for (int i = 0 ; i < INPUT_numColumns ; i++)
                 {
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.Write(INPUT_currentWord[i]);
-                    Console.ResetColor();
+                    Console.Write("       |");
                 }
-                else
+            }
+            else
+            {
+                for (int i = 0 ; i < INPUT_currentWord.Length ; i++)
                 {
-                    Console.Write(INPUT_currentWord[i]);
+                    if (INPUT_currentWord[i] != '^' && INPUT_currentWord[i] != '*' && INPUT_currentWord[i] != '#')
+                    {
+                        Console.Write("   ");
+                        if (INPUT_currentWord[i+1] == '^')
+                        {
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write(INPUT_currentWord[i]);
+                            Console.ResetColor();
+                        }
+                        else if(INPUT_currentWord[i+1] == '*')
+                        {
+                            Console.BackgroundColor = ConsoleColor.Black;
+                            Console.ForegroundColor = ConsoleColor.DarkYellow;
+                            Console.Write(INPUT_currentWord[i]);
+                            Console.ResetColor();
+                        }
+                        else
+                        {
+                            Console.Write(INPUT_currentWord[i]);
+                        }
+                        Console.Write("   |");
+                    }
                 }
-                Console.Write("   |");
             }
             Console.Write("\n");
-            Console.WriteLine("|" + string.Concat(Enumerable.Repeat("       |", INPUT_numRows)));
+            Console.WriteLine("|" + string.Concat(Enumerable.Repeat("       |", INPUT_numColumns)));
         }
     }
 }
