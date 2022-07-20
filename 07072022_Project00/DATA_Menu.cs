@@ -44,19 +44,29 @@ namespace Project_00
             Console.WriteLine();
             Console.WriteLine();
 
+            Console.WriteLine("   Rank    Name                    Turns    Seconds");
             int WORK_counterLeaderboard = 0;
             while (DB_reader.Read())
             {
                 WORK_counterLeaderboard++;
-                Console.Write("\t");
+                Console.Write("    ");
                 Console.Write(WORK_counterLeaderboard);
-                Console.Write(". ");
+                Console.Write(".    ");
                 Console.Write(DB_reader.GetString(1));
-                Console.Write(" - ");
+                for (int i = 20 ; i - DB_reader.GetString(1).Length > 0 ; i --)
+                {
+                    Console.Write(" ");
+                }
+                Console.Write("   |   ");
                 Console.Write(DB_reader.GetInt32(2));
-                Console.Write(" - ");
+                Console.Write("   |   ");
                 Console.Write(DB_reader.GetInt32(3));
                 Console.Write("\n");
+            }
+
+            if (WORK_counterLeaderboard == 0)
+            {
+                Console.WriteLine("\tNo records are in the leaderboard right now.");
             }
         }
     }

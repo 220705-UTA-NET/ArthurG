@@ -9,11 +9,11 @@
 #                                                  #
 #                                                  #
 #                                                  #
-#        g - Start Classic Game                    #
-#        l - Leaderboards                          #
-#        c - Credits                               #
+#            g - Start Classic Game                #
+#            l - Leaderboards                      #
+#            c - Credits                           #
 #                                                  #
-#        q - Quit                                  #
+#            q - Quit                              #
 #                                                  #
 #                                                  #
 #                                                  #

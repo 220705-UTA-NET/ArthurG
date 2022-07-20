@@ -22,4 +22,4 @@ SELECT TOP 10 *
 From Project00_Wordle.Leaderboards
 ORDER BY Used_Time ASC;
 
---DELETE * FROM Project00_Wordle.Leaderboards;
+-- DELETE FROM Project00_Wordle.Leaderboards;

@@ -56,20 +56,25 @@ namespace Project_00
                 {
                     case 'i':
                         DB_leaderboardAccess.DATA_MENU_printLeaderboardData('i');
+
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("Press anything to continue");
+                        Console.ReadKey();
+
                         break;
                     case 'k':
                         DB_leaderboardAccess.DATA_MENU_printLeaderboardData('k');
+
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.WriteLine("Press anything to continue");
+                        Console.ReadKey();
+
                         break;
                     case 'q':
                         FLAG_runMenu = false;
                         break;
-                }
-                if (FLAG_runMenu == true)
-                {
-                    Console.WriteLine();
-                    Console.WriteLine();
-                    Console.WriteLine("Press anything to continue");
-                    Console.ReadKey();
                 }
             }
         }

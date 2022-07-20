@@ -77,7 +77,8 @@ namespace Project_00
                 // Console.ReadKey();
             }
             DateTime WORK_TimerPost = DateTime.Now;
-            int WORK_usedTime = ((WORK_TimerPost - WORK_TimerPrior).Minutes * 60) + (WORK_TimerPost - WORK_TimerPrior).Seconds;
+            TimeSpan WORK_DifferenceTime = WORK_TimerPost - WORK_TimerPrior;
+            int WORK_usedTime = Convert.ToInt32(WORK_DifferenceTime.TotalSeconds);
 
             Console.Clear();
 
@@ -108,7 +109,7 @@ namespace Project_00
             {
                 LOGIC_GAME_uploadLeaderboards(COUNTER_numGuesses, WORK_usedTime);
             }
-            
+
             Console.WriteLine();
             Console.WriteLine("Press anything to continue");
             Console.ReadKey();
@@ -192,18 +193,19 @@ namespace Project_00
         private void LOGIC_GAME_uploadLeaderboards(int INPUT_usedTurns, int INPUT_usedTime)
         {
             Console.WriteLine("Do you want to submit your game to the leaderboards [y/n]");
-            ConsoleKeyInfo INPUT_userChoice = Console.ReadKey();
+            ConsoleKeyInfo INPUT_userChoice;
 
             bool FLAG_validChoice = false;
             while (FLAG_validChoice == false)
             {
+                INPUT_userChoice = Console.ReadKey();
                 switch (INPUT_userChoice.KeyChar)
                 {
                     case 'y':
                         FLAG_validChoice = true;
                         
-                        Console.WriteLine("\nPlease enter your name: ");
-                        string INPUT_playerName = Console.ReadLine();
+                        Console.WriteLine();
+                        string INPUT_playerName = LOGIC_GAME_getUserName();
 
                         DATA_Game DB_uploader = new DATA_Game();
                         DB_uploader.DATA_GAME_uploadDatabase(INPUT_playerName, INPUT_usedTurns, INPUT_usedTime);
@@ -215,10 +217,30 @@ namespace Project_00
                     case 'n':
                         FLAG_validChoice = true;
                         break;
-                    default:
-                        break;
                 }
+                Console.Write(" ");
             }
+        }
+
+        private string LOGIC_GAME_getUserName()
+        {
+            string INPUT_playerName;
+            while (true)
+            {
+                Console.WriteLine("Please enter your name: ");
+                INPUT_playerName = Console.ReadLine();  
+                
+                if(INPUT_playerName.Length > 20)
+                {
+                    Console.WriteLine("   ~ Sorry, inputed name is too long, please try again.");
+                }
+                else if (INPUT_playerName == "") {}
+                else
+                {
+                    break;
+                }
+            } 
+            return INPUT_playerName;
         }
     }
 }
