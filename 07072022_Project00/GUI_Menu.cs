@@ -15,7 +15,7 @@ namespace Project_00
         {
             string PATH_mainMenu = @"./MENUS/MENU_Main.txt";
 
-            StreamReader WORK_fsStream = new StreamReader(PATH_mainMenu);
+            using StreamReader WORK_fsStream = new StreamReader(PATH_mainMenu);
             string WORK_fsLine;
             while((WORK_fsLine = WORK_fsStream.ReadLine()) != null)
             {
@@ -28,7 +28,7 @@ namespace Project_00
             Console.Clear();
             string PATH_mainMenu = @"./MENUS/MENU_Credits.txt";
 
-            StreamReader WORK_fsStream = new StreamReader(PATH_mainMenu);
+            using StreamReader WORK_fsStream = new StreamReader(PATH_mainMenu);
             string WORK_fsLine;
             while((WORK_fsLine = WORK_fsStream.ReadLine()) != null)
             {
@@ -83,7 +83,7 @@ namespace Project_00
         {
             string PATH_mainMenu = @"./MENUS/MENU_Leaderboard.txt";
 
-            StreamReader WORK_fsStream = new StreamReader(PATH_mainMenu);
+            using StreamReader WORK_fsStream = new StreamReader(PATH_mainMenu);
             string WORK_fsLine;
             while((WORK_fsLine = WORK_fsStream.ReadLine()) != null)
             {
