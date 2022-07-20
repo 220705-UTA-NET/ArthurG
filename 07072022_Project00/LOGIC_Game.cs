@@ -57,7 +57,7 @@ namespace Project_00
                 GAME_Display.GUI_GAME_PrintGameGrid(GAME_PROP_numWordLength, GAME_PROP_numGuesses, GAME_DATA_wordList);
                 
                 string INPUT_userWord = LOGIC_GAME_getValidGuess();
-                if(INPUT_userWord == "quit")
+                if(INPUT_userWord == "!@#$%^&*()_+")
                 {
                     break;
                 }
@@ -135,7 +135,7 @@ namespace Project_00
                 }
                 else if (INPUT_userWord == "quit")
                 {
-                    OUTPUT_Guess = INPUT_userWord;
+                    OUTPUT_Guess = "!@#$%^&*()_+";
                     FLAG_hasValidGuess = true;
                 }
                 else if (INPUT_userWord.Length < this.GAME_PROP_numWordLength)
