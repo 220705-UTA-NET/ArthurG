@@ -13,6 +13,7 @@ namespace Project01_Client.Logic
         // METHODS
         public async Task MENU_LOGIC_MAIN()
         {
+            Console.CursorVisible = false;
             MENU_LOGIC_START MENU_startMenu = new MENU_LOGIC_START();
             MENU_PROP_userDATA = await MENU_startMenu.MENU_LOGIC_START_MAIN();
 
@@ -43,7 +44,7 @@ namespace Project01_Client.Logic
                             if(MENU_PROP_userDATA.tokens > 0)
                             {
                                 Console.Clear();
-                                int TEMP = await API_COMMANDS.API_Request_UpdateTokens(MENU_PROP_userDATA.id, MENU_PROP_userDATA.tokens - 1);
+                                await API_COMMANDS.API_Request_UpdateTokens(MENU_PROP_userDATA.id, MENU_PROP_userDATA.tokens - 1);
                                 MENU_PROP_userDATA.tokens--;
                                 GAME_LOGIC MENU_PROP_gameSession = new GAME_LOGIC(100, 30, 100);
                                 MENU_PROP_gameSession.GAME_LOGIC_MAIN(); 

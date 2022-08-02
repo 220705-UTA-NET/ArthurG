@@ -10,12 +10,6 @@ namespace Project01_Client.App
         {
             MENU_LOGIC gameSession = new MENU_LOGIC();
             await gameSession.MENU_LOGIC_MAIN();
-
-            /*Console.WriteLine("Resize Window");
-            Console.ReadLine();*/
-
-            //GAME_LOGIC gameSession = new();
-            //gameSession.GAME_LOGIC_MAIN();
         }
     }
 }

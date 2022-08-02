@@ -14,6 +14,8 @@ CREATE TABLE Project01_Snake.UserData
 SELECT *
 FROM Project01_Snake.UserData
 
+--DELETE FROM Project01_Snake.UserData;
+
 UPDATE Project01_Snake.UserData
 SET DB_ProAccount = 'true'
 WHERE DB_ID = 1
