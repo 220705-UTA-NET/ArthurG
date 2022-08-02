@@ -20,13 +20,32 @@ namespace Project01_Client.Logic
         GAME_DISPLAY GAME_UI_Display = new GAME_DISPLAY();
 
         // CONSTRUCTOR
-        internal GAME_LOGIC()
+        internal GAME_LOGIC(int INPUT_WindowWidth, int INPUT_WindowHeight, int INPUT_GameSpeed)
+        {
+            GAME_PROP_Width = INPUT_WindowWidth;
+            GAME_PROP_Height = INPUT_WindowHeight;
+            Console.SetWindowSize(GAME_PROP_Width, GAME_PROP_Height+5);
+
+            GAME_PROP_Speed = INPUT_GameSpeed;
+
+            GAME_DATA_snakeLength = 1;
+
+            GAME_LOGIC_COORDINATES WORK_startCoordinates = new(GAME_PROP_Width / 2, GAME_PROP_Height / 2);
+            GAME_DATA_snakeLocation.Add(WORK_startCoordinates);
+
+            GAME_UI_Display.GAME_DISPLAY_printBorder(GAME_PROP_Width, GAME_PROP_Height);
+            GAME_UI_Display.GAME_DISPLAY_printSnakeHead(GAME_DATA_snakeLocation.Last());
+
+            GAME_DATA_foodLocation = GAME_LOGIC_genFoodLocation();
+            GAME_UI_Display.GAME_DISPLAY_printFoodLocation(GAME_DATA_foodLocation);
+        }
+        internal GAME_LOGIC(int INPUT_GameSpeed)
         {
             GAME_PROP_Width = Console.WindowWidth;
             GAME_PROP_Height = Console.WindowHeight;
             Console.SetWindowSize(GAME_PROP_Width, GAME_PROP_Height);
 
-            GAME_PROP_Speed = 100;
+            GAME_PROP_Speed = INPUT_GameSpeed;
 
             GAME_DATA_snakeLength = 1;
 
@@ -41,7 +60,7 @@ namespace Project01_Client.Logic
         }
 
         // METHODS
-        internal int GAME_LOGIC_MAIN()
+        internal void GAME_LOGIC_MAIN()
         {
             int INPUT_currUserChoice = 0;
             int INPUT_prevUserChoice = 0;
@@ -99,10 +118,12 @@ namespace Project01_Client.Logic
                 Thread.Sleep(GAME_PROP_Speed);
             }
 
-            Console.Clear();
-            Console.WriteLine(GAME_DATA_snakeLength);
+            Console.SetCursorPosition(0, GAME_PROP_Height + 1);
+            Console.WriteLine("Final Snake Length: " + GAME_DATA_snakeLength);
+            Console.WriteLine();
+            Console.WriteLine("Press Anything to Return");
             Console.ReadLine();
-            return GAME_DATA_snakeLength;
+            return;
         }
         private void GAME_LOGIC_convertSnakeMovement(int INPUT_snakeDirection)
         {
@@ -137,7 +158,7 @@ namespace Project01_Client.Logic
             // -1 for exiting the game (Escape Key)
             // 0 for nonsense inputs
 
-            ConsoleKeyInfo INPUT_userDirection = Console.ReadKey(false);
+            ConsoleKeyInfo INPUT_userDirection = Console.ReadKey(true);
             if (INPUT_userDirection.Key == ConsoleKey.Escape)
             {
                 return -1;

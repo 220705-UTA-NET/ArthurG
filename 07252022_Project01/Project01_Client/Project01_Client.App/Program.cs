@@ -2,14 +2,14 @@
 using System.Threading;
 
 
-namespace Project01_Client
+namespace Project01_Client.App
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             MENU_LOGIC gameSession = new MENU_LOGIC();
-            gameSession.MENU_LOGIC_MAIN();
+            await gameSession.MENU_LOGIC_MAIN();
 
             /*Console.WriteLine("Resize Window");
             Console.ReadLine();*/
